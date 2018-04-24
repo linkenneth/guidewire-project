@@ -1,0 +1,44 @@
+To Do List and Notes
+-------------------------------------------------------------------------
+- WordyGame implements IWordy
+- The main method in WordyGame passes AN INSTANCE of itself as "wordy" (which implements IWordy) to WordyFrame
+- WordyFrame then initializes the GUI
+- While the program runs, WordyFrame calls methods such as generateNewBoard() and scoreWords() from
+  _wordy, which is WordyGame
+
+
+NOTE: CHECK ALL ACCESS MODIFIERS
+
+Scoring
+----------
+- To score a list of words, call WordScoreImpl.scorewords on each word then add if not none
+
+
+Generating new board
+---------------------------
+- To generate new board, it is sufficient to instantiate a new instance of the BoardImpl class
+- This is also necessary as ALL_DICE is emptied out in initiating the BoardImpl class
+
+
+Word Validating
+-------------------
+- First and foremost, if the word contains letters not on the board, then return 0 false immediately
+	- create a hashset of letters and check .contains()
+- Check board to locate first letter (part of loop to check for duplicates of this first letter)
+- After first letter is found, find its nearest neighbors
+- Neighbors are found by finding the 8 positions (TOPLEFT, TOP, TOPRIGHT, ...) of the board position
+	- Only execute if position is in range of board, otherwise return null
+- A hashmap is made, with keys = (row, column) of board and value = array of neighbor positions
+	- Array used because we need specific neighbor position
+  in the form of (row, column)
+- For memory efficiency, values are added to this hashmap only if needed (memoization)
+- Check whether the next letter is a nearest neighbor, else return false
+- If it is, repeat the procedure with the next letter until all of the word has been iterated over
+
+Data Structure
+---------------------
+- Hashmap with keys = (row, column) but value = array of letters?
+	- to access the position of neighbors, you just find the index of the letter and backtrack
+	- index%3 = col, (index-index%3)/3 = row
+
+PROBLEM: BACKTRACKING
